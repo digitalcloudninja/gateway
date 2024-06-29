@@ -24,7 +24,7 @@ repositories {
     mavenCentral()
     maven {
         name = "GitHubPackages"
-        url = uri("https://maven.pkg.github.com/${{project.findProperty("IMAGE_NAME") ?: System.getenv("IMAGE_NAME")}}")
+        url = uri("https://maven.pkg.github.com/digitalcloudninja/gateway-service")
         credentials {
             username = project.findProperty("USERNAME") ?: System.getenv("USERNAME")
             password = project.findProperty("PKG_TOKEN") ?: System.getenv("PKG_TOKEN")
@@ -33,11 +33,18 @@ repositories {
 }
 
 ext {
+    set('springVersion', "3.3.1")
     set('springCloudVersion', "2023.0.2")
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web:3.3.1'
+    implementation "org.springframework.boot:spring-boot-starter-web:${springVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-actuator:${springVersion}"
+    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -58,7 +65,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/${{project.findProperty("IMAGE_NAME") ?: System.getenv("IMAGE_NAME")}}")
+            url = uri("https://maven.pkg.github.com/digitalcloudninja/gateway-service")
             credentials {
                 username = project.findProperty("USERNAME") ?: System.getenv("USERNAME")
                 password = project.findProperty("PKG_TOKEN") ?: System.getenv("PKG_TOKEN")

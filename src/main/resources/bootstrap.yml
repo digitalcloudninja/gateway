@@ -1,0 +1,16 @@
+spring:
+    cloud:
+        config:
+            discovery:
+                enabled: true
+                service-id: configuration-service
+            name: gateway-service
+eureka:
+    client:
+        region: us-east-1
+        registry-fetch-interval-seconds: 30
+    instance:
+        prefer-ip-address: true
+logging:
+    level:
+        org.springframework.cloud.gateway.*: DEBUG
