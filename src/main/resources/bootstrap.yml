@@ -3,8 +3,8 @@ spring:
         config:
             discovery:
                 enabled: true
-                service-id: configuration-service
-            name: gateway-service
+                service-id: configuration
+            name: gateway
 eureka:
     client:
         region: us-east-1
